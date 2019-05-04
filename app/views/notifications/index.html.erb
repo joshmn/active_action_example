@@ -1,0 +1,29 @@
+<style>
+  a[disabled=disabled] { pointer-events: none !important; opacity: 0.8 }
+</style>
+<%= form_for :notifications do |f| %>
+  <div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle active_actions_button" disabled="disabled" href="#" id="activeActionsButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
+    <div class="dropdown-menu" aria-labelled-by="activeActionsButton">
+      <% active_actions_for(:all).each do |action| %>
+        <a class="dropdown-item active_action" href="javascript:;" data-action="<%= action.path %>"><%= action.label %></a>
+      <% end %>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <td><input class="active_actions_select_all" type="checkbox" /></td>
+      <td>ID</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @notifications.each do |notification| %>
+      <tr>
+        <td><input type="checkbox" name="collection_ids[]" class="active_actions_selection" value="<%= notification.id %>" /></td>
+        <td><%= notification.id %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
